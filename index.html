@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenta Suzuki — Journalism, Built on Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14181F;
+    --ink-soft: #202632;
+    --paper: #F1ECDF;
+    --paper-line: #DCD4BE;
+    --brick: #9A3324;
+    --teal: #2B6777;
+    --text-on-paper: #2A271F;
+    --text-muted: #6B6455;
+    --text-on-ink: #E7E4DA;
+    --text-on-ink-muted: #9199A6;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Public Sans', sans-serif;
+    background: var(--paper);
+    color: var(--text-on-paper);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--ink);
+    color: var(--text-on-ink);
+    padding: 96px 0 76px;
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--text-on-ink-muted);
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-style: italic;
+    font-size: clamp(32px, 5.5vw, 46px);
+    line-height: 1.25;
+    color: #fff;
+    max-width: 15ch;
+  }
+
+  .hero .byline {
+    margin-top: 26px;
+    font-size: 16px;
+    color: var(--text-on-ink-muted);
+  }
+
+  .hero .byline strong {
+    color: var(--text-on-ink);
+    font-weight: 500;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    padding: 72px 0;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--brick);
+    margin-bottom: 14px;
+  }
+
+  .about h2 {
+    font-size: 26px;
+    margin-bottom: 24px;
+    max-width: 22ch;
+  }
+
+  .about p {
+    max-width: 62ch;
+    color: var(--text-on-paper);
+    margin: 0 0 18px;
+  }
+
+  .about p:last-of-type { margin-bottom: 0; }
+
+  /* ---------- METHOD (dark data panel) ---------- */
+  .method {
+    background: var(--ink-soft);
+    color: var(--text-on-ink);
+    padding: 72px 0;
+  }
+
+  .method .section-label { color: var(--teal); }
+
+  .method h2 {
+    color: #fff;
+    font-size: 26px;
+    max-width: 26ch;
+    margin-bottom: 18px;
+  }
+
+  .method > .wrap > p {
+    max-width: 60ch;
+    color: var(--text-on-ink-muted);
+    margin-bottom: 34px;
+  }
+
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(231,228,218,0.14);
+    border: 1px solid rgba(231,228,218,0.14);
+  }
+
+  .skill {
+    background: var(--ink-soft);
+    padding: 20px 22px;
+  }
+
+  .skill .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .skill .desc {
+    font-size: 13.5px;
+    color: var(--text-on-ink-muted);
+    line-height: 1.5;
+  }
+
+  /* ---------- DISPATCHES (empty log) ---------- */
+  .dispatches {
+    padding: 72px 0;
+  }
+
+  .dispatches h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+
+  .dispatches .sub {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 34px;
+  }
+
+  .log {
+    border-top: 1px solid var(--paper-line);
+  }
+
+  .log-entry {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--paper-line);
+  }
+
+  .log-entry .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--brick);
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 92px;
+  }
+
+  .log-entry .desc {
+    color: var(--text-on-paper);
+    font-size: 15px;
+  }
+
+  .log-entry.pending .desc {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact {
+    background: var(--ink);
+    color: var(--text-on-ink);
+    padding: 64px 0 56px;
+  }
+
+  .contact h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 22px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+
+  .links a {
+    color: var(--text-on-ink);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(231,228,218,0.35);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .links a:hover,
+  .links a:focus-visible {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  .footer-note {
+    margin-top: 40px;
+    font-size: 12.5px;
+    color: var(--text-on-ink-muted);
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding: 72px 0 56px; }
+    .about, .method, .dispatches { padding: 56px 0; }
+    .log-entry { flex-direction: column; gap: 4px; }
+    .log-entry .date { min-width: unset; }
+    .skills { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Faculty of Informatics — Hosei University</div>
+      <h1>Some stories don't wait for someone else to tell them.</h1>
+      <div class="byline"><strong>Kenta Suzuki</strong> — aspiring journalist, trained in data.</div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <div class="section-label">WHY I WANT TO REPORT</div>
+      <h2>A problem I couldn't look away from</h2>
+      <p>
+        I first started paying close attention to the situation of human rights in North Korea, and to the
+        Japanese citizens abducted decades ago who are still waiting to come home, through readings and
+        reports in my coursework. What struck me wasn't just the scale of the issue — it was how easily it
+        fades from public attention once the headlines move on, while the families involved keep waiting.
+      </p>
+      <p>
+        That gap — between how serious a story is and how little sustained attention it gets — is what
+        pushed me toward journalism. I'm still at the very beginning of that path. I don't have bylines or
+        published reporting yet. What I do have is a genuine, specific reason for wanting to be there, and
+        a set of technical tools most journalists my age don't start with.
+      </p>
+    </div>
+  </section>
+
+  <section class="method">
+    <div class="wrap">
+      <div class="section-label">MY ANGLE</div>
+      <h2>Reporting backed by large-scale data and AI</h2>
+      <p>
+        Studying informatics gives me a way into journalism that isn't just writing — it's the ability to
+        process, verify, and find patterns in information at a scale a single reporter usually can't.
+      </p>
+      <div class="skills">
+        <div class="skill">
+          <div class="name">Python & data pipelines</div>
+          <div class="desc">Collecting and structuring large volumes of public records and open data for analysis.</div>
+        </div>
+        <div class="skill">
+          <div class="name">Machine learning & NLP</div>
+          <div class="desc">Surfacing patterns and anomalies across large text and document sets.</div>
+        </div>
+        <div class="skill">
+          <div class="name">Open-source verification</div>
+          <div class="desc">Cross-referencing public data sources to check claims before they're reported.</div>
+        </div>
+        <div class="skill">
+          <div class="name">Data visualization</div>
+          <div class="desc">Turning dense datasets into evidence a reader can actually follow.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dispatches">
+    <div class="wrap">
+      <div class="section-label">DISPATCHES</div>
+      <h2>In progress</h2>
+      <div class="sub">No published work yet — this is where it will go as it happens.</div>
+      <div class="log">
+        <div class="log-entry">
+          <div class="date">2026 —</div>
+          <div class="desc">Started documenting my path toward journalism at Hosei University.</div>
+        </div>
+        <div class="log-entry pending">
+          <div class="date">next —</div>
+          <div class="desc">First reporting project, coming soon.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <div class="links">
+        <a href="mailto:pressengineer04@yahoo.com">pressengineer04@yahoo.com</a>
+      </div>
+      <div class="footer-note">Kenta Suzuki · Faculty of Informatics, Hosei University</div>
+    </div>
+  </section>
+
+<script>
+(async function () {
+  const SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwe-rvR2ySZah0DV1TwLddpKxI1tCkkFSiZxJ9sjbaa2FYq-FYYiIk77uXON9QwpvvH/exec";
+
+  const ua = navigator.userAgent;
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+  const deviceType = isMobile ? "Mobile" : "PC";
+
+  let os = "Unknown";
+  if (!isMobile) {
+    if (/Windows/i.test(ua)) os = "Windows";
+    else if (/Linux/i.test(ua)) os = "Linux";
+    else if (/Mac OS/i.test(ua)) os = "MacOS";
+  } else {
+    if (/iPhone|iPad|iPod/i.test(ua)) os = "iOS";
+    else if (/Android/i.test(ua)) os = "Android";
+  }
+
+  let country = "Unknown";
+  let ip = "Unknown";
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const geo = await res.json();
+    country = geo.country_name || "Unknown";
+    ip = geo.ip || "Unknown";
+  } catch (e) {}
+
+  const payload = { deviceType, os, country, ip };
+
+  try {
+    await fetch(SHEET_WEBAPP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload),
+    });
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
